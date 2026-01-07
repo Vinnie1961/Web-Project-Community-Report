@@ -25,8 +25,16 @@ class FrontController extends Controller
         return view('reportMaker');
     }
 
-    public function store(Request $request){
+    public function login(){
+        return view ('login');
+    }
 
+    public function register(){
+        return view ('register');
+    }
+
+    public function store(Request $request){
+            
         Report::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -36,8 +44,8 @@ class FrontController extends Controller
             'status'=> 'Unaddressed',
             
         ]);
-
-        return view('reports');
+        // return $request -> title;
+        return redirect()->route('reports');
     }
 
     // public function dummySave(){

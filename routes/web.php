@@ -6,14 +6,17 @@ use App\Http\Controllers\FrontController;
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('/about', [FrontController::class, 'about']);
-Route::get('/reports', [FrontController::class, 'reports']);
-Route::get('/reportMaker', [FrontController::class, 'reportMaker']);
+Route::get('/reports', [FrontController::class, 'reports'])->name('reports');
+Route::get('/reportMaker', [FrontController::class, 'reportMaker'])->name('report.maker');
+Route::post('/reportMaker/store', [FrontController::class, 'store'])->name('report.store');
+
+
 // Route::get('/repodummy', [FrontController::class, 'dummySave']);
 
 // Route::get('/portofolios', [PortofolioController::class, 'index'])->name('portofolios.index');
 // Route::get('/portofolios/create', [PortofolioController::class, 'create'])->name('portofolios.create');
 // Route::get('/report/store', [FrontController::class, 'store'])->name('report.store');
-Route::post('/report/store', [FrontController::class, 'store'])->name('report.store');
+
 
 
 // Route::get('/session/set', [SessionController::class, 'index'])->name('session.set');
