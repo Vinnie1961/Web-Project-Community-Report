@@ -8,31 +8,21 @@ Route::get('/', [FrontController::class, 'index']);
 Route::get('/about', [FrontController::class, 'about']);
 Route::get('/reports', [FrontController::class, 'reports'])->name('reports');
 Route::get('/reportMaker', [FrontController::class, 'reportMaker'])->name('report.maker');
-Route::post('/reportMaker/store', [FrontController::class, 'store'])->name('report.store');
+Route::post('/reportMaker/store', [FrontController::class, 'storeReport'])->name('report.store');
 
+Route::get('/reportManager', [FrontController::class, 'reports'])->name('reportManager');
 
-// Route::get('/repodummy', [FrontController::class, 'dummySave']);
+Route::get('/login', [FrontController::class, 'login']) -> name('login');
+Route::post('/login', [FrontController::class, 'auth']) -> name('login.post');
+Route::post('/logout', [FrontController::class, 'logout']) -> name('logout');
 
-// Route::get('/portofolios', [PortofolioController::class, 'index'])->name('portofolios.index');
-// Route::get('/portofolios/create', [PortofolioController::class, 'create'])->name('portofolios.create');
-// Route::get('/report/store', [FrontController::class, 'store'])->name('report.store');
-
-
-
-// Route::get('/session/set', [SessionController::class, 'index'])->name('session.set');
-// Route::get('/session/get', [SessionController::class, 'getSession'])->name('session.get');
-// Route::post('/session/set', [SessionController::class, 'storeSession'])->name('session.store');
-// Route::post('/session/delete', [SessionController::class, 'deleteSession'])->name('session.delete');
-
-
-// Route::get('/demo/index', [DemoController::class, 'index']) -> name('demo.index');
-
-// Route::get('/demo/login', [DemoController::class, 'login']) -> name('demo.login');
-// Route::post('/demo/login', [DemoController::class, 'auth']) -> name('demo.login.post');
-// Route::post('/demo/logout', [DemoController::class, 'logout']) -> name('demo.logout');
+Route::get('/register', [FrontController::class, 'register'])->name('register');
+Route::post('/register/store', [FrontController::class, 'storeRegister'])->name('register.post');
 
 // Route::middleware([CustomMiddleware::class]) -> group(function(){
 //     Route::get('/demo/restricted-access', [DemoController::class, 'restrictedAccess']) -> name('demo.restricted-access') -> middleware(CustomMiddleware::class);
 //     Route::get('/demo/profile', [DemoController::class, 'profile']) -> name('demo.profile');
 //     Route::get('/demo/dashboard', [DemoController::class, 'dashboard']) -> name('demo.dashboard');
 // });
+
+

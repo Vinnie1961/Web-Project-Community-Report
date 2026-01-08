@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\User;
 
 class FrontController extends Controller
 {
@@ -21,6 +22,11 @@ class FrontController extends Controller
         return view('reports', ['reports'=>$reports]);
     }
 
+    public function reportManager(){
+        $reports = Report::all();
+        return view('reportManager', ['reportManager'=>$reports]);
+    }
+
     public function reportMaker(){
         return view('reportMaker');
     }
@@ -29,11 +35,39 @@ class FrontController extends Controller
         return view ('login');
     }
 
+    public function auth(Request $request){
+        //hardcoded authentication check
+        if($request->email == 'admin@email.com' && $request->password == 'password'){
+            $request->session()->put('user_id', 1);
+            return redirect()->route('app.welcome');
+        }else{
+            return redirect()->route('login')->withErrors('Invalid Credentials');
+        }
+        
+    }
+
+    public function logout(Request $request){
+        $request->session()->forget('user_id');
+        return redirect()->route('app.welcome');
+    }
+
     public function register(){
         return view ('register');
     }
 
-    public function store(Request $request){
+    public function StoreRegister(Request $request){
+        
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->pass,
+        ]);
+
+        return redirect()->route('index');
+
+    }
+
+    public function storeReport(Request $request){
             
         Report::create([
             'title' => $request->title,
@@ -46,6 +80,24 @@ class FrontController extends Controller
         ]);
         // return $request -> title;
         return redirect()->route('reports');
+    }
+
+    public function deleteReport($id){
+        $report = Report::find($id);
+        if($report){ 
+            $report = Report::find($id);
+            $report->delete();
+            dump($report);
+        }
+    }
+
+    public function addressReport($id){
+        $report = Report::find($id);
+        if($report){ 
+            $report->status = "Addressed";
+            $report->save();
+            dump($report);
+        }
     }
 
     // public function dummySave(){
@@ -64,25 +116,7 @@ class FrontController extends Controller
     //     return view('app.portofolioDetail', ['portofolio'=>$portofolio]);
     // }
 
-    // public function dummyUpdate($id){
-    //     $portofolio = Portofolio::find($id);
-    //     if($portofolio){ //check if Portofolio exists
-    //         $portofolio->title = "Portofolio Pertama";
-    //         $portofolio->save();
-    //         dump($portofolio);
-    //     }else{
-    //         return "Data doesn't exist";
-    //     }
-    // }
     
-    // public function dummyDelete($id){
-    //     $portofolio = Portofolio::find($id);
-    //     if($portofolio){ //check if Portofolio exists
-    //         $portofolio = Portofolio::find($id);
-    //         $portofolio->delete();
-    //         dump($portofolio);
-    //     }else{
-    //         return "Data doesn't exist";
-    //     }
-    // }
+    
+    
 }

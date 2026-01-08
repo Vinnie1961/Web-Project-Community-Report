@@ -16,7 +16,7 @@ class CustomMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if($request->session()->has('user_id') == false){
-            return redirect()->route('demo.login');
+            return redirect()->route('login');
         }
         return $next($request);
     }

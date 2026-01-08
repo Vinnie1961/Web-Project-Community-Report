@@ -15,25 +15,48 @@
             aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-tonggler-icon"></span>
             </button>
+
+            {{-- @if (session()->has('user_id')) --}}
             <div class="collapse navbar-collapse" id="navbarNav"> 
                 <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
-                    {{-- <li class="navbar-item">
-                        <a href="/about" class="nav-link">About us</a>
-                    </li> --}}
                     <li class="navbar-item">
                         <a href="/reports" class="nav-link">Reports</a>
                     </li>
                     <li class="navbar-item">
                         <a href="/reportMaker" class="nav-link">Submit a Report</a>
                     </li>
-
-                    
-                    
                 </ul>
             </div>
+            {{-- <form action="{{route('logout')}}" method="POST">
+                @csrf
+                <button type="submit" class="btn">Logout</button>
+            </form> --}}
+
+            {{-- @else --}}
+            {{-- <span class="navbar-text">
+            <div class="collapse navbar-collapse" id="navbarNav"> 
+                <ul class="navbar-nav">
+                    <li class="navbar-item">
+                        <a href="/login" class="nav-link">Login</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="/register" class="nav-link">Register</a>
+                    </li>
+                </ul>
+            </div> --}}
+
+
+            {{-- @endif --}}
+    </span>
+
+    {{-- <span class="navbar-text"> --}}
+            {{-- @if (session()->has('user_id'))  IF USER IS ADMIN --}}
+            {{-- <a href="/reportManager" class="nav-link">Manage Reports</a> --}}
+            
+            {{-- @endif --}}
+    {{-- </span> --}}
+    
+            
         </div>
     </nav>
 
@@ -41,22 +64,8 @@
         @yield('content')
     </main>
 
-    <span class="navbar-text">
-            @if (session()->has('user_id'))
-            <form action="{{route('demo.logout')}}" method="POST">
-                @csrf
-                <button type="submit" class="btn">Logout</button>
-            </form>
+    
 
-            <li class="navbar-item">
-                <a href="/demo/profile" class="nav-link">Profile</a>
-            </li>
-            <li class="navbar-item">
-                <a href="/demo/dashboard" class="nav-link">Dashboard</a>
-            </li>
-            
-            @endif
-    </span>
     
     <script src = "{{ asset('js/bootstrap.bundle.min.js')}}">
 
